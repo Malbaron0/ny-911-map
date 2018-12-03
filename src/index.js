@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style.css';
-import App from './src/App';
-import * as serviceWorker from './src/serviceWorker';
+import './css/style.css';
+import 'leaflet/dist/leaflet.css'
+import App from './components/App';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
