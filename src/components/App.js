@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
+import React, {
+  Component
+} from 'react';
 import LeafletMap from './LeafletMap';
 import NYCOpenData from '../resources/NYCOpenData';
+import Loading from './Loading';
 
 class App extends Component {
   constructor(props) {
@@ -35,9 +38,17 @@ class App extends Component {
 
 
   render() {
-    return (
-      <LeafletMap/>
-    );
+    if (this.state.loading) {
+      return (
+        <Loading />
+      )
+    }
+    else {
+      console.log(this.state.nycOpenData);
+      return (
+        <LeafletMap />
+      );
+    }
   }
 }
 

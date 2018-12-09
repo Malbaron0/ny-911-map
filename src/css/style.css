@@ -16,3 +16,9 @@ body {
 .map {
   height: 100%;
 }
+
+.loading {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+}
