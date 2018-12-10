@@ -4,6 +4,8 @@ import React, {
 import LeafletMap from './LeafletMap';
 import NYCOpenData from '../resources/NYCOpenData';
 import Loading from './Loading';
+import SideBar from './SideBar';
+import SideBarChoices from './SideBarChoices';
 
 class App extends Component {
   constructor(props) {
@@ -36,7 +38,7 @@ class App extends Component {
       });
   }
 
-
+s
   render() {
     if (this.state.loading) {
       return (
@@ -44,9 +46,11 @@ class App extends Component {
       )
     }
     else {
-      console.log(this.state.nycOpenData);
       return (
-        <LeafletMap />
+        <div>
+                <SideBarChoices/>
+          <LeafletMap />
+        </div>
       );
     }
   }
