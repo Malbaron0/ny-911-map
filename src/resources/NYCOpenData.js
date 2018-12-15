@@ -11,6 +11,17 @@ let NYCOpenData = {
             .then(response => response.json())
     },
 
+    getCrimeTypes : (nycData) => {
+        let result = nycData.reduce((accumlator, current) => {
+            if (accumlator.length === 0 || !accumlator.includes(current.ofns_desc)){
+                accumlator.push(current.ofns_desc);
+            }
+            
+            return accumlator;
+        }, [])
+
+        return result;
+    },
     //recursively call for multiple options?
     getByYear : (nycData, year) => {
         return nycData.filter(crime =>year === new Date(crime.cmplnt_fr_dt).getUTCFullYear())

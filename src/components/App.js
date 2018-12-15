@@ -4,8 +4,6 @@ import React, {
 import LeafletMap from './LeafletMap';
 import NYCOpenData from '../resources/NYCOpenData';
 import Loading from './Loading';
-import SideBar from './SideBar';
-import SideBarChoices from './SideBarChoices';
 
 class App extends Component {
   constructor(props) {
@@ -13,6 +11,7 @@ class App extends Component {
     this.state = {
       loading: false,
       nycOpenData: [],
+      crimeTypes: [],
       error: ""
     }
 
@@ -23,12 +22,18 @@ class App extends Component {
       loading: true
     });
 
-    NYCOpenData.nycData().then(data => {
-      this.setState({
-        nycOpenData: data,
-        loading: false
-      });
-    })
+    NYCOpenData.nycData()
+      .then(data => {
+        this.setState({
+          nycOpenData: data,
+          crimeTypes: NYCOpenData.getCrimeTypes(data)
+        });
+      })
+      .then(data => {
+        this.setState({
+          loading: false
+        })
+      })
       .catch(error => {
         this.setState({
           loading: false,
@@ -38,7 +43,7 @@ class App extends Component {
       });
   }
 
-s
+  s
   render() {
     if (this.state.loading) {
       return (
@@ -47,10 +52,7 @@ s
     }
     else {
       return (
-        <div>
-                <SideBarChoices/>
           <LeafletMap />
-        </div>
       );
     }
   }
