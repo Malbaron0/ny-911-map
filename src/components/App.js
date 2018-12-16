@@ -4,14 +4,15 @@ import React, {
 import LeafletMap from './LeafletMap';
 import NYCOpenData from '../resources/NYCOpenData';
 import Loading from './Loading';
+import SideBar from './SideBar';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
+      loading: true,
       nycOpenData: [],
-      crimeTypes: [],
+      categoryValues: {}, //array to hold values for the year and crime type dropdown
       error: ""
     }
 
@@ -26,13 +27,16 @@ class App extends Component {
       .then(data => {
         this.setState({
           nycOpenData: data,
-          crimeTypes: NYCOpenData.getCrimeTypes(data)
+          categoryValues: NYCOpenData.getCrimeTypes(data)
         });
+        console.log(this.state.loading)
       })
       .then(data => {
         this.setState({
           loading: false
         })
+        console.log(this.state.loading)
+
       })
       .catch(error => {
         this.setState({
@@ -43,7 +47,7 @@ class App extends Component {
       });
   }
 
-  s
+  
   render() {
     if (this.state.loading) {
       return (
@@ -52,7 +56,11 @@ class App extends Component {
     }
     else {
       return (
+        <div className="parent-container">
+          <SideBar className="sideBar" 
+                  nycOpenData = {this.state.nycOpenData} categoryValues = {this.state.categoryValues}></SideBar>
           <LeafletMap />
+          </div>
       );
     }
   }

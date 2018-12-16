@@ -1,30 +1,45 @@
 //fetch
 let NYCOpenData = {
-    
+
     nycData: () => {
         let url = 'https://data.cityofnewyork.us/resource/9s4h-37hy.json';
         return fetch(url, {
-                headers: {
-                    'X-App-Token': 'VxVfB1l051bDWPhFmrm2QeX9a'
-                },
-            })
+            headers: {
+                'X-App-Token': 'VxVfB1l051bDWPhFmrm2QeX9a'
+            },
+        })
             .then(response => response.json())
     },
 
-    getCrimeTypes : (nycData) => {
+    //Get category values for year, crimeType
+    getCrimeTypes: (nycData) => {
         let result = nycData.reduce((accumlator, current) => {
-            if (accumlator.length === 0 || !accumlator.includes(current.ofns_desc)){
-                accumlator.push(current.ofns_desc);
+
+            let year = new Date(current.cmplnt_fr_dt).getFullYear();
+
+            if (accumlator["crimeTypes"] === undefined && accumlator["years"] === undefined) {
+                accumlator["crimeTypes"] = [];
+                accumlator["years"] = [];
             }
-            
+            if (accumlator["crimeTypes"].length === 0 || !accumlator["crimeTypes"].includes(current.ofns_desc)) {
+                if (current.ofns_desc !== undefined) {
+                    accumlator["crimeTypes"].push(current.ofns_desc);
+                }
+            }
+            if (accumlator["years"].length === 0 || !accumlator["years"].includes(year)) {
+                if (!Number.isNaN(year)) {
+                    accumlator["years"].push(year);
+                }
+            }
+
             return accumlator;
-        }, [])
+        }, {})
 
         return result;
     },
     //recursively call for multiple options?
-    getByYear : (nycData, year) => {
-        return nycData.filter(crime =>year === new Date(crime.cmplnt_fr_dt).getUTCFullYear())
+    getByYear: (nycData, year) => {
+        return nycData.filter(crime => year === new Date(crime.cmplnt_fr_dt).getUTCFullYear())
     },
 
     getByCrime: (nycData, crimeName) => {
@@ -36,10 +51,10 @@ let NYCOpenData = {
     },
 
     getMultiple: (nycData, year, crimeName, borough) => {
-        return nycData.filter (crime => {
+        return nycData.filter(crime => {
             return (year === new Date(crime.cmplnt_fr_dt).getUTCFullYear() &&
-            crime.law_cat_cd === crimeName &&
-            crime.boro_nm === borough)
+                crime.law_cat_cd === crimeName &&
+                crime.boro_nm === borough)
         })
     }
 
