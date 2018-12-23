@@ -71,12 +71,7 @@ class SideBar extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.setState(((prevState) => {
-            return {
-                searchCriteria : this.searchCriteriaTemp
-            }
-        }))
-        console.log(this.state.searchCriteria)
+        this.props.updateCategoryValues(this.searchCriteriaTemp);
     }
 
     choiceItems = (categoryValues) => {
@@ -104,9 +99,9 @@ class SideBar extends Component {
     render() {
 
         return (
-            <Menu width={"1000px"} Menu isOpen={true}>
+            <div width={"1000px"}>
                 {this.choiceItems(this.props.categoryValues)}
-            </Menu>
+            </div>
         )
 
     }

@@ -13,6 +13,7 @@ class App extends Component {
       loading: true,
       nycOpenData: [],
       categoryValues: {}, //array to hold values for the year and crime type dropdown
+      selectedCategoryValues: {},
       error: ""
     }
 
@@ -48,6 +49,11 @@ class App extends Component {
   }
 
   
+  updateCategoryValues = (selectedCategoryValues) => {
+    this.setState({selectedCategoryValues})
+  }
+
+
   render() {
     if (this.state.loading) {
       return (
@@ -58,8 +64,8 @@ class App extends Component {
       return (
         <div className="parent-container">
           <SideBar className="sideBar" 
-                  nycOpenData = {this.state.nycOpenData} categoryValues = {this.state.categoryValues}></SideBar>
-          <LeafletMap />
+                  updateCategoryValues = {this.updateCategoryValues} categoryValues = {this.state.categoryValues}></SideBar>
+          <LeafletMap selectedCategoryValues = {this.state.selectedCategoryValues} />
           </div>
       );
     }

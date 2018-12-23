@@ -28,6 +28,7 @@ class LeafletMap extends Component {
     const position = [this.state.lat, this.state.lng]
     this.fixLeafletMarker();
 
+   console.log(this.props.selectedCategoryValues);
     return (
       <Map className="map" center={position} zoom={this.state.zoom}>
         <TileLayer
@@ -35,6 +36,11 @@ class LeafletMap extends Component {
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
         />
         <Marker position={position}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+        </Marker>
+        <Marker position={[41.650002, -73.949997]}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
               </Popup>
