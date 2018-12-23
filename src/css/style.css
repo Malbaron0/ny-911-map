@@ -26,3 +26,7 @@ body{
   font-size: 2em;
   font-weight: bold;
 }
+
+.custom-select {
+  width: auto !important;
+}

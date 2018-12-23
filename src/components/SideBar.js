@@ -2,64 +2,113 @@ import React, { Component } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import Select from 'react-select';
 import shortid from 'shortid';
+
+//TODO: Add ability to choose multiple values 
 class SideBar extends Component {
     constructor() {
         super();
         this.state = {
-            crimeValues: [],
-            yearValues: [],
-            boroughValues: []
+            searchCriteria : {
+                crimes: [],
+                years: [],
+                boroughs: []
+            }
+        }
+       this.searchCriteriaTemp = {
+        crimeValues: [],
+        yearValues: [],
+        boroughValues: []
+       }
+    }
+
+    handleChangeCrime = (e) =>{
+        console.log(e.target.value);
+        if(!this.searchCriteriaTemp.crimeValues.includes(e.target.value)){
+            this.searchCriteriaTemp.crimeValues.push(e.target.value);
+        }
+           
+    }
+
+    handleChangeYear = (e) =>{
+        console.log(e.target.value);
+        if(!this.searchCriteriaTemp.yearValues.includes(e.target.value)){
+            this.searchCriteriaTemp.yearValues.push(e.target.value);
+        }
+    }
+
+    handleChangeBorough = (e) =>{
+        console.log(e.target.value);
+        if(!this.searchCriteriaTemp.boroughValues.includes(e.target.value)){
+            this.searchCriteriaTemp.boroughValues.push(e.target.value);
         }
     }
 
     crimeTypes = (crimeTypes) => {
-        return crimeTypes.map(crimeType => {
-            return <option key={shortid.generate()} value={`${crimeType}`}>{`${crimeType}`}</option>
-        })
+        return (
+            <select multiple className="custom-select" onChange={this.handleChangeCrime} >
+                {crimeTypes.map(crimeType => {
+                    return <option key={shortid.generate()} value={`${crimeType}`}>{`${crimeType}`}</option>
+                })}
+            </select>
+        );
     }
 
     yearTypes = (years) => {
         let sortedYears = years.sort();
-        return sortedYears.filter(year => year).map(year => {
-            return <option key={shortid.generate()} value={`${year}`}>{`${year}`}</option>
-        })
+
+        return (
+            <select multiple className="custom-select" onChange={this.handleChangeYear} >
+                {sortedYears.filter(year => year)
+                    .map(year => {
+                        return <option key={shortid.generate()} value={`${year}`}>{`${year}`}</option>
+                    })
+                }
+            </select>
+        )
     }
 
 
 
-    handleSubmit(event) {
+    handleSubmit = event => {
         event.preventDefault();
+        this.setState(((prevState) => {
+            return {
+                searchCriteria : this.searchCriteriaTemp
+            }
+        }))
+        console.log(this.state.searchCriteria)
     }
 
     choiceItems = (categoryValues) => {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <select name="year" id="byYear">
-                    {this.yearTypes(categoryValues["years"])}
-                </select>,
-                <select name="borough" id="byBorough">
+            <div className="input-group">
+
+                {this.yearTypes(categoryValues["years"])}
+                ,
+                <select multiple className="custom-select" onChange={this.handleChangeBorough}>
                     <option value="BROOKLYN">Brooklyn</option>
                     <option value="QUEENS">Queens</option>
                     <option value="BRONX">Bronx</option>
                     <option value="MANHATTAN">Manhattan</option>
                 </select>,
-                <select name="crime" id="byCrime">
+
                     {this.crimeTypes(categoryValues["crimeTypes"])}
-                </select>
-                <input type="submit" value="Submit" />
-            </form>
+
+                <div className="input-group-append">
+                    <button className="btn btn-outline-secondary" onClick={this.handleSubmit} type="button">Button</button>
+                </div>
+            </div>
         )
     }
 
     render() {
-        console.log(this.props.categoryValues )
-        
-            return (
-                <Menu width={"1000px"} Menu isOpen={true}>
-                    {this.choiceItems(this.props.categoryValues)}
-                </Menu>
-            )
-        
+
+        return (
+            <Menu width={"1000px"} Menu isOpen={true}>
+                {this.choiceItems(this.props.categoryValues)}
+            </Menu>
+        )
+
     }
 }
 

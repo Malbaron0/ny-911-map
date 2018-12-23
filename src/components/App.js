@@ -5,7 +5,7 @@ import LeafletMap from './LeafletMap';
 import NYCOpenData from '../resources/NYCOpenData';
 import Loading from './Loading';
 import SideBar from './SideBar';
-
+//TODO: create functions that will setstate on categoryValues, pass that to map, use that to create pins
 class App extends Component {
   constructor(props) {
     super(props);
