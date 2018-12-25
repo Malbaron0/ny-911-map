@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Markers from './Markers';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
@@ -35,16 +36,7 @@ class LeafletMap extends Component {
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
         />
-        <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-        </Marker>
-        <Marker position={[41.650002, -73.949997]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-        </Marker>
+        <Markers data = {this.props.data} selectedCategoryValues = {this.props.selectedCategoryValues}></Markers>
       </Map>
     )
   }

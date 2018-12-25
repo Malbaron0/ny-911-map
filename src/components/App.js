@@ -65,7 +65,7 @@ class App extends Component {
         <div className="parent-container">
           <SideBar className="sideBar" 
                   updateCategoryValues = {this.updateCategoryValues} categoryValues = {this.state.categoryValues}></SideBar>
-          <LeafletMap selectedCategoryValues = {this.state.selectedCategoryValues} />
+          <LeafletMap selectedCategoryValues = {this.state.selectedCategoryValues} data = {this.state.nycOpenData} />
           </div>
       );
     }

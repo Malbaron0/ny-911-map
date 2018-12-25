@@ -5,42 +5,40 @@ import shortid from 'shortid';
 
 //TODO: Add ability to choose multiple values 
 class SideBar extends Component {
-    constructor() {
-        super();
-        this.state = {
-            searchCriteria : {
-                crimes: [],
-                years: [],
-                boroughs: []
-            }
-        }
-       this.searchCriteriaTemp = {
+
+    searchCriteria = {
         crimeValues: [],
         yearValues: [],
         boroughValues: []
-       }
     }
 
-    handleChangeCrime = (e) =>{
+
+
+    handleChangeCrime = (e) => {
         console.log(e.target.value);
-        if(!this.searchCriteriaTemp.crimeValues.includes(e.target.value)){
-            this.searchCriteriaTemp.crimeValues.push(e.target.value);
+        if (!this.searchCriteria.crimeValues.includes(e.target.value)) {
+            this.searchCriteria.crimeValues.push(e.target.value);
         }
-           
+
     }
 
-    handleChangeYear = (e) =>{
+    handleChangeYear = (e) => {
         console.log(e.target.value);
-        if(!this.searchCriteriaTemp.yearValues.includes(e.target.value)){
-            this.searchCriteriaTemp.yearValues.push(e.target.value);
+        if (!this.searchCriteria.yearValues.includes(e.target.value)) {
+            this.searchCriteria.yearValues.push(e.target.value);
         }
     }
 
-    handleChangeBorough = (e) =>{
+    handleChangeBorough = (e) => {
         console.log(e.target.value);
-        if(!this.searchCriteriaTemp.boroughValues.includes(e.target.value)){
-            this.searchCriteriaTemp.boroughValues.push(e.target.value);
+        if (!this.searchCriteria.boroughValues.includes(e.target.value)) {
+            this.searchCriteria.boroughValues.push(e.target.value);
         }
+    }
+
+    handleSubmit = event => {
+        event.preventDefault();
+        this.props.updateCategoryValues(this.searchCriteria);
     }
 
     crimeTypes = (crimeTypes) => {
@@ -68,12 +66,6 @@ class SideBar extends Component {
     }
 
 
-
-    handleSubmit = event => {
-        event.preventDefault();
-        this.props.updateCategoryValues(this.searchCriteriaTemp);
-    }
-
     choiceItems = (categoryValues) => {
         return (
             <div className="input-group">
@@ -99,7 +91,7 @@ class SideBar extends Component {
     render() {
 
         return (
-            <div width={"1000px"}>
+            <div >
                 {this.choiceItems(this.props.categoryValues)}
             </div>
         )

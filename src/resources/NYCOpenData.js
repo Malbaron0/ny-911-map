@@ -21,9 +21,9 @@ let NYCOpenData = {
                 accumlator["crimeTypes"] = [];
                 accumlator["years"] = [];
             }
-            if (accumlator["crimeTypes"].length === 0 || !accumlator["crimeTypes"].includes(current.ofns_desc)) {
-                if (current.ofns_desc !== undefined) {
-                    accumlator["crimeTypes"].push(current.ofns_desc);
+            if (accumlator["crimeTypes"].length === 0 || !accumlator["crimeTypes"].includes(current.law_cat_cd)) {
+                if (current.law_cat_cd !== undefined) {
+                    accumlator["crimeTypes"].push(current.law_cat_cd);
                 }
             }
             if (accumlator["years"].length === 0 || !accumlator["years"].includes(year)) {
@@ -39,22 +39,23 @@ let NYCOpenData = {
     },
     //recursively call for multiple options?
     getByYear: (nycData, year) => {
-        return nycData.filter(crime => year === new Date(crime.cmplnt_fr_dt).getUTCFullYear())
+        return nycData.filter(crime => year == new Date(crime.cmplnt_fr_dt).getUTCFullYear())
     },
 
     getByCrime: (nycData, crimeName) => {
-        return nycData.filter(crime => crime.law_cat_cd === crimeName)
+        return nycData.filter(crime => crime.law_cat_cd == crimeName)
     },
 
     getByBorough: (nycData, borough) => {
-        return nycData.filter(crime => crime.boro_nm === borough)
+        return nycData.filter(crime => crime.boro_nm == borough)
     },
 
     getMultiple: (nycData, year, crimeName, borough) => {
+        console.log(`${year}  ${crimeName}  ${borough}`);
         return nycData.filter(crime => {
-            return (year === new Date(crime.cmplnt_fr_dt).getUTCFullYear() &&
-                crime.law_cat_cd === crimeName &&
-                crime.boro_nm === borough)
+            return (year == new Date(crime.cmplnt_fr_dt).getUTCFullYear() &&
+                crime.law_cat_cd == crimeName &&
+                crime.boro_nm == borough)
         })
     }
 
