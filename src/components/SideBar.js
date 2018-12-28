@@ -96,23 +96,21 @@ class SideBar extends Component {
 
     choiceItems = (categoryValues) => {
         return (
-            <div>
-
+            <React.Fragment>
                 {this.yearTypes(categoryValues["years"])}
-                ,
                 {this.crimeTypes(categoryValues["crimeTypes"])}
-
+                {this.boroughTypes()}
                 <div className="input-group-append">
                     <button className="btn btn-outline-secondary" onClick={this.handleSubmit} type="button">Button</button>
                 </div>
-            </div>
+            </React.Fragment>
         )
     }
 
     render() {
 
         return (
-            <div >
+            <div className="sideBar" >
                 {this.choiceItems(this.props.categoryValues)}
             </div>
         )
