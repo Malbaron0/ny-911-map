@@ -3,24 +3,20 @@ body{
   padding: 0;
   margin: 0;
 }
-.leaflet-container {
-  height: 100vh;
-  width: 100vw;
-  z-index: 10;
-
-}
-
-.sideBar{
-  width: 100vw;
-  position: absolute;
-  height: 200px;
-}
 
 .parent-container{
   height: 100vh;
   width: 100vw;
   position: relative;
 }
+
+.leaflet-container {
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+
+}
+
 .loading {
   text-align: center;
   font-size: 2em;
@@ -29,4 +25,22 @@ body{
 
 .custom-select {
   width: auto !important;
+}
+.category-selects{
+  position: relative;
+    z-index: 10;
+}
+
+.sideBar{
+  width: 100vw;
+  position: relative !important;
+  z-index: 100;
+}
+
+.basic-multi-select{
+  margin: 1em 0;
+}
+
+.input-group-append{
+  position: relative;
 }

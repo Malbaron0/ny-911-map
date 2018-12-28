@@ -63,7 +63,7 @@ class App extends Component {
     else {
       return (
         <div className="parent-container">
-          <SideBar className="sideBar" 
+          <SideBar 
                   updateCategoryValues = {this.updateCategoryValues} categoryValues = {this.state.categoryValues}></SideBar>
           <LeafletMap selectedCategoryValues = {this.state.selectedCategoryValues} data = {this.state.nycOpenData} />
           </div>

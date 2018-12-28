@@ -43,7 +43,7 @@ class SideBar extends Component {
 
     crimeTypes = (crimeTypes) => {
         let options = crimeTypes.map(crimeType => {
-            return { value : `${crimeType}`, label: `${crimeType}`}
+            return { value: `${crimeType}`, label: `${crimeType}` }
         });
         return (
             <Select
@@ -76,10 +76,10 @@ class SideBar extends Component {
 
     boroughTypes = () => {
         let options = [
-            { value : "BROOKLYN", label: 'Brooklyn'},
-            { value : "QUEENS", label: 'Queens'},
-            { value : "BRONX", label: 'Bronx'},
-            { value : "MANHATTAN", label: 'Manhattan'}
+            { value: "BROOKLYN", label: 'Brooklyn' },
+            { value: "QUEENS", label: 'Queens' },
+            { value: "BRONX", label: 'Bronx' },
+            { value: "MANHATTAN", label: 'Manhattan' }
         ];
 
         return (
@@ -96,25 +96,33 @@ class SideBar extends Component {
 
     choiceItems = (categoryValues) => {
         return (
-            <div>
-
+            <React.Fragment>
+                <div className="category-selects">
                 {this.yearTypes(categoryValues["years"])}
-                ,
                 {this.crimeTypes(categoryValues["crimeTypes"])}
-
+                {this.boroughTypes()}
+                </div>
                 <div className="input-group-append">
                     <button className="btn btn-outline-secondary" onClick={this.handleSubmit} type="button">Button</button>
                 </div>
-            </div>
+            </React.Fragment>
         )
     }
 
     render() {
 
         return (
-            <div >
+            <nav className=" sideBar navbar navbar-expand-lg navbar-light bg-light">
+                <a className="navbar-brand" href="#">Search</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            
                 {this.choiceItems(this.props.categoryValues)}
-            </div>
+ </div>
+
+            </nav>
         )
 
     }
