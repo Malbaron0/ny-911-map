@@ -2,6 +2,7 @@
 body{
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 .parent-container{
@@ -35,6 +36,10 @@ body{
   width: 100vw;
   position: relative !important;
   z-index: 100;
+}
+
+.navbar{
+  padding: .5em 0;
 }
 
 .basic-multi-select{

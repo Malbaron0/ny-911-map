@@ -97,10 +97,10 @@ class SideBar extends Component {
     choiceItems = (categoryValues) => {
         return (
             <React.Fragment>
-                <div className="category-selects">
-                {this.yearTypes(categoryValues["years"])}
-                {this.crimeTypes(categoryValues["crimeTypes"])}
-                {this.boroughTypes()}
+                <div className="category-selects nav-item">
+                    {this.yearTypes(categoryValues["years"])}
+                    {this.crimeTypes(categoryValues["crimeTypes"])}
+                    {this.boroughTypes()}
                 </div>
                 <div className="input-group-append">
                     <button className="btn btn-outline-secondary" onClick={this.handleSubmit} type="button">Button</button>
@@ -112,15 +112,15 @@ class SideBar extends Component {
     render() {
 
         return (
-            <nav className=" sideBar navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="#">Search</a>
+            <nav className=" sideBar navbar fixed-top navbar-dark bg-dark">
+                <div className="navbar-brand">Search for crime</div>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            
-                {this.choiceItems(this.props.categoryValues)}
- </div>
+
+                    {this.choiceItems(this.props.categoryValues)}
+                </div>
 
             </nav>
         )
