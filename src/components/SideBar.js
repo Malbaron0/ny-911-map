@@ -5,7 +5,7 @@ import shortid from 'shortid';
 
 //TODO: Add ability to choose multiple values 
 class SideBar extends Component {
-
+    
     searchCriteria = {
         crimeValues: [],
         yearValues: [],
@@ -16,6 +16,7 @@ class SideBar extends Component {
 
     handleChangeCrime = (e) => {
         console.log(e);
+        this.searchCriteria.crimeValues = this.getValues(e);
         // if (!this.searchCriteria.crimeValues.includes(e.target.value)) {
         //     this.searchCriteria.crimeValues.push(e.target.value);
         // }
@@ -24,6 +25,8 @@ class SideBar extends Component {
 
     handleChangeYear = (e) => {
         console.log(e);
+        this.searchCriteria.yearValues = this.getValues(e);
+
         // if (!this.searchCriteria.yearValues.includes(e.target.value)) {
         //     this.searchCriteria.yearValues.push(e.target.value);
         // }
@@ -31,9 +34,15 @@ class SideBar extends Component {
 
     handleChangeBorough = (e) => {
         console.log(e);
+        this.searchCriteria.boroughValues = this.getValues(e);
+
         // if (!this.searchCriteria.boroughValues.includes(e.target.value)) {
         //     this.searchCriteria.boroughValues.push(e.target.value);
         // }
+    }
+
+    getValues = (array) => {
+        return array.map(elemet => elemet.value);
     }
 
     handleSubmit = event => {

@@ -51,6 +51,8 @@ class App extends Component {
   
   updateCategoryValues = (selectedCategoryValues) => {
     this.setState({selectedCategoryValues})
+    console.log(selectedCategoryValues);
+    console.log(this.state);
   }
 
 
