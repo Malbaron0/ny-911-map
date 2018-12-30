@@ -24,7 +24,7 @@ class SideBar extends Component {
     }
 
     handleChangeYear = (e) => {
-        console.log(e);
+        console.log(this.getValues(e));
         this.searchCriteria.yearValues = this.getValues(e);
 
         // if (!this.searchCriteria.yearValues.includes(e.target.value)) {

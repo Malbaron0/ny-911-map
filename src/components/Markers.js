@@ -13,11 +13,8 @@ class Markers extends Component {
                     )
         }
         else {
-            let byCrimes = NYCOpenData.getByCrime(nycData,
-                selectedCategoryValues.crimeValues[0])
-            let filtered = NYCOpenData.getByBorough(byCrimes,
-                selectedCategoryValues.boroughValues[0]
-                )
+            let filtered = NYCOpenData.getMultiple(nycData,
+                selectedCategoryValues);
             
             let markersArray = this.createMarkers(filtered);
 

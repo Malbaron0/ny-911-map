@@ -37,26 +37,50 @@ let NYCOpenData = {
 
         return result;
     },
-    //recursively call for multiple options?
+    
     getByYear: (nycData, year) => {
-        return nycData.filter(crime => year == new Date(crime.cmplnt_fr_dt).getUTCFullYear())
+        return nycData.filter(crime => {
+            let stringDate = new Date(crime.cmplnt_fr_dt).getUTCFullYear().toString();
+            if(year.includes(stringDate)){
+                return true;
+            }
+        })
     },
 
     getByCrime: (nycData, crimeName) => {
-        return nycData.filter(crime => crime.law_cat_cd == crimeName)
+        return nycData.filter( crime => {
+            if(crimeName.includes(crime.law_cat_cd))
+                return true;
+        })
     },
 
     getByBorough: (nycData, borough) => {
-        return nycData.filter(crime => crime.boro_nm == borough)
+        return nycData.filter(crime => {
+            if(borough.includes(crime.boro_nm)){
+                return true;
+            }
+        })
     },
 
-    getMultiple: (nycData, year, crimeName, borough) => {
-        console.log(`${year}  ${crimeName}  ${borough}`);
-        return nycData.filter(crime => {
-            return (year == new Date(crime.cmplnt_fr_dt).getUTCFullYear() &&
-                crime.law_cat_cd == crimeName &&
-                crime.boro_nm == borough)
+    getMultiple: (nycData, selectedCategoryValues) => {
+        let results = 
+        
+        nycData.filter(crime => {
+            let stringDate = new Date(crime.cmplnt_fr_dt).getUTCFullYear().toString();
+            if(selectedCategoryValues.yearValues.includes(stringDate)){
+                return true;
+            }
         })
+        .filter(crimeByYear => {
+            if(selectedCategoryValues.crimeValues.includes(crimeByYear.law_cat_cd))
+                return true;
+        })
+        .filter(crimeByType => {
+            if(selectedCategoryValues.boroughValues.includes(crimeByType.boro_nm)){
+                return true;
+            }
+        })
+        return results;
     }
 
 
