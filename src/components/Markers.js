@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Marker, Popup } from 'react-leaflet';
-import isObjectEmpty from '../resources/Utils';
+import {isObjectEmpty} from '../resources/Utils';
 import NYCOpenData from '../resources/NYCOpenData';
 
 class Markers extends Component {

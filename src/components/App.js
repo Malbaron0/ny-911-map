@@ -5,13 +5,15 @@ import LeafletMap from './LeafletMap';
 import NYCOpenData from '../resources/NYCOpenData';
 import Loading from './Loading';
 import SideBar from './SideBar';
+import {mergeArrays} from '../resources/Utils';
+
 //TODO: create functions that will setstate on categoryValues, pass that to map, use that to create pins
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      nycOpenData: [],
+      crimeData: [],
       categoryValues: {}, //array to hold values for the year and crime type dropdown
       selectedCategoryValues: {},
       error: ""
@@ -24,27 +26,24 @@ class App extends Component {
       loading: true
     });
 
-    NYCOpenData.nycData()
+    Promise.all([NYCOpenData.nycData(NYCOpenData.historicalDataURL), 
+      NYCOpenData.nycData(NYCOpenData.yearToDateDataURL)])
       .then(data => {
         this.setState({
-          nycOpenData: data,
+          crimeData: mergeArrays(data[0], data[1]),
           categoryValues: NYCOpenData.getCrimeTypes(data)
         });
-        console.log(this.state.loading)
       })
       .then(data => {
         this.setState({
           loading: false
         })
-        console.log(this.state.loading)
-
       })
       .catch(error => {
         this.setState({
           loading: false,
           error
         })
-        console.log(error);
       });
   }
 
@@ -52,7 +51,6 @@ class App extends Component {
   updateCategoryValues = (selectedCategoryValues) => {
     this.setState({selectedCategoryValues})
     console.log(selectedCategoryValues);
-    console.log(this.state);
   }
 
 
@@ -67,7 +65,7 @@ class App extends Component {
         <div className="parent-container">
           <SideBar 
                   updateCategoryValues = {this.updateCategoryValues} categoryValues = {this.state.categoryValues}></SideBar>
-          <LeafletMap selectedCategoryValues = {this.state.selectedCategoryValues} data = {this.state.nycOpenData} />
+          <LeafletMap selectedCategoryValues = {this.state.selectedCategoryValues} data = {this.state.crimeData} />
           </div>
       );
     }
