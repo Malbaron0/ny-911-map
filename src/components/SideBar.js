@@ -12,33 +12,21 @@ class SideBar extends Component {
         boroughValues: []
     }
 
-
-
     handleChangeCrime = (e) => {
         console.log(e);
         this.searchCriteria.crimeValues = this.getValues(e);
-        // if (!this.searchCriteria.crimeValues.includes(e.target.value)) {
-        //     this.searchCriteria.crimeValues.push(e.target.value);
-        // }
+
 
     }
 
     handleChangeYear = (e) => {
         console.log(this.getValues(e));
         this.searchCriteria.yearValues = this.getValues(e);
-
-        // if (!this.searchCriteria.yearValues.includes(e.target.value)) {
-        //     this.searchCriteria.yearValues.push(e.target.value);
-        // }
     }
 
     handleChangeBorough = (e) => {
         console.log(e);
         this.searchCriteria.boroughValues = this.getValues(e);
-
-        // if (!this.searchCriteria.boroughValues.includes(e.target.value)) {
-        //     this.searchCriteria.boroughValues.push(e.target.value);
-        // }
     }
 
     getValues = (array) => {

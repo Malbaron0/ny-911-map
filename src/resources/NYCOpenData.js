@@ -14,8 +14,10 @@ let NYCOpenData = {
             .then(response => response.json())
     },
 
-    //change this 
-    getCrimeTypes: (nycData) => {
+    /*Iterate over passed in data and get all the possible values for years and crime types.
+    Those values are then displayed to the user as possible filter options for the data. 
+    */
+    getYearsAndCrimeTypes: (nycData) => {
         let categories = nycData.map(data => {
             
             let result = data.reduce((accumlator, current) => {
@@ -78,19 +80,31 @@ let NYCOpenData = {
 
     getMultiple: (nycData, selectedCategoryValues) => {
         let results = 
-        
+        /*filter through the data. Return all the data based on the users chosen values.
+        //if user doesnt specify a filter criteria (year, borough, crimetype) then its assumed all data should used 
+        for that category.*/
         nycData.filter(crime => {
             let stringDate = new Date(crime.cmplnt_fr_dt).getUTCFullYear().toString();
             if(selectedCategoryValues.yearValues.includes(stringDate)){
                 return true;
             }
+            if (!Array.isArray(selectedCategoryValues.yearValues) || !selectedCategoryValues.yearValues.length) {
+                return true;
+            }
         })
         .filter(crimeByYear => {
-            if(selectedCategoryValues.crimeValues.includes(crimeByYear.law_cat_cd))
+            if(selectedCategoryValues.crimeValues.includes(crimeByYear.law_cat_cd)){
                 return true;
+            }
+            if (!Array.isArray(selectedCategoryValues.crimeValues) || !selectedCategoryValues.crimeValues.length) {
+                return true;
+            }
         })
         .filter(crimeByType => {
             if(selectedCategoryValues.boroughValues.includes(crimeByType.boro_nm)){
+                return true;
+            }
+            if (!Array.isArray(selectedCategoryValues.boroughValues) || !selectedCategoryValues.boroughValues.length) {
                 return true;
             }
         })

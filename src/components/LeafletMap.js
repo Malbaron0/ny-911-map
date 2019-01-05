@@ -5,10 +5,11 @@ import L from 'leaflet';
 
 class LeafletMap extends Component {
 
-  state = {
-    lat: 40.650002,
-    lng: -73.949997,
-    zoom: 13,
+  //longitude and latitude of new york
+  defaultPosition = {
+    lat: 40.730610,
+    lng: -73.935242,
+    zoom: 10,
   }
 
   /*Issues with using icons in react-leaflt. 
@@ -26,12 +27,11 @@ class LeafletMap extends Component {
   }
 
   render() {
-    const position = [this.state.lat, this.state.lng]
+    const position = [this.defaultPosition.lat, this.defaultPosition.lng]
     this.fixLeafletMarker();
 
-   console.log(this.props.selectedCategoryValues);
     return (
-      <Map className="map" center={position} zoom={this.state.zoom}>
+      <Map className="map" center={position} zoom={this.defaultPosition.zoom}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"

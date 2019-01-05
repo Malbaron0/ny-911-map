@@ -7,15 +7,14 @@ import Loading from './Loading';
 import SideBar from './SideBar';
 import {mergeArrays} from '../resources/Utils';
 
-//TODO: create functions that will setstate on categoryValues, pass that to map, use that to create pins
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      crimeData: [],
+      crimeData: [], 
       categoryValues: {}, //array to hold values for the year and crime type dropdown
-      selectedCategoryValues: {},
+      selectedCategoryValues: {}, //state used to store user's selected filter options for the data
       error: ""
     }
 
@@ -26,12 +25,13 @@ class App extends Component {
       loading: true
     });
 
+    //Promise chain to 2 API's
     Promise.all([NYCOpenData.nycData(NYCOpenData.historicalDataURL), 
       NYCOpenData.nycData(NYCOpenData.yearToDateDataURL)])
       .then(data => {
         this.setState({
-          crimeData: mergeArrays(data[0], data[1]),
-          categoryValues: NYCOpenData.getCrimeTypes(data)
+          crimeData: mergeArrays(data[0], data[1]), //merge the data (the historic and year to date data)
+          categoryValues: NYCOpenData.getYearsAndCrimeTypes(data)
         });
       })
       .then(data => {

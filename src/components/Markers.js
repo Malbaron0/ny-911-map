@@ -8,9 +8,8 @@ class Markers extends Component {
     MarkerCollection = (nycData, selectedCategoryValues) => {
         if (isObjectEmpty(selectedCategoryValues)) {
             return (<Marker position={[40.7128, -74.0060]}>
-                        <Popup>Empty :(</Popup>
-                    </Marker>
-                    )
+                        <Popup>Search for crimes through the search filter above.</Popup>
+                    </Marker>)
         }
         else {
             let filtered = NYCOpenData.getMultiple(nycData,
@@ -30,6 +29,7 @@ class Markers extends Component {
                 let crimePosition = [crime.latitude,crime.longitude];
                 markers.push(
                     <Marker position={crimePosition}>
+                        {/* more descriptive popups needed */}
                         <Popup>{crime.pd_desc}</Popup>
                     </Marker>
                 )
