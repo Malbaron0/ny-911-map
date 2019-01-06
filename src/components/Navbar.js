@@ -109,7 +109,7 @@ class Navbar extends Component {
 
         return (
             <nav className="sideBar navbar fixed-top navbar-dark bg-dark">
-                <div className="navbar-brand">Search for crime</div>
+                <div className="navbar-brand">NYC Crime Map</div>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
