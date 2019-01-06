@@ -4,7 +4,7 @@ import React, {
 import LeafletMap from './LeafletMap';
 import NYCOpenData from '../resources/NYCOpenData';
 import Loading from './Loading';
-import SideBar from './SideBar';
+import Navbar from './Navbar';
 import {mergeArrays} from '../resources/Utils';
 
 class App extends Component {
@@ -63,8 +63,8 @@ class App extends Component {
     else {
       return (
         <div className="parent-container">
-          <SideBar 
-                  updateCategoryValues = {this.updateCategoryValues} categoryValues = {this.state.categoryValues}></SideBar>
+          <Navbar 
+                  updateCategoryValues = {this.updateCategoryValues} categoryValues = {this.state.categoryValues}></Navbar>
           <LeafletMap selectedCategoryValues = {this.state.selectedCategoryValues} data = {this.state.crimeData} />
           </div>
       );

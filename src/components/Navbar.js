@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { slide as Menu } from 'react-burger-menu';
 import Select from 'react-select';
 import shortid from 'shortid';
 
 //TODO: Add ability to choose multiple values 
-class SideBar extends Component {
+class Navbar extends Component {
     
     searchCriteria = {
         crimeValues: [],
@@ -125,5 +124,5 @@ class SideBar extends Component {
     }
 }
 
-export default SideBar;
+export default Navbar;
 
