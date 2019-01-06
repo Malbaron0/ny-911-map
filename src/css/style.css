@@ -39,7 +39,7 @@ body{
 }
 
 .navbar{
-  padding: .5em 0;
+  padding: .5em 1em;
 }
 
 .basic-multi-select{
@@ -48,4 +48,12 @@ body{
 
 .input-group-append{
   position: relative;
+}
+
+.btn-outline-secondary {
+  width: 100%;
+  color: white;
+  background-color: #28a745;
+  background-image: none;
+  border-color: #28a745;
 }

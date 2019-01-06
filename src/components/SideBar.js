@@ -100,7 +100,7 @@ class SideBar extends Component {
                     {this.boroughTypes()}
                 </div>
                 <div className="input-group-append">
-                    <button className="btn btn-outline-secondary" onClick={this.handleSubmit} type="button">Button</button>
+                    <button data-toggle="collapse" data-target=".navbar-collapse.show" className="btn btn-outline-secondary" onClick={this.handleSubmit} type="button">Submit</button>
                 </div>
             </React.Fragment>
         )
@@ -109,7 +109,7 @@ class SideBar extends Component {
     render() {
 
         return (
-            <nav className=" sideBar navbar fixed-top navbar-dark bg-dark">
+            <nav className="sideBar navbar fixed-top navbar-dark bg-dark">
                 <div className="navbar-brand">Search for crime</div>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
